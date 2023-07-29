@@ -49,11 +49,11 @@ ul.psf-trending-posts li a:hover {
 
 /* GIFs CSS */
 /* Custom CSS for the GIF */
+
 .psf-new-gif {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30px; /* Adjust the width as needed */
+    display: inline-block;
+    width: 20px; /* Adjust the width as needed */
     height: auto; /* Maintain aspect ratio */
-    z-index: 1;
+    vertical-align: middle;
 }
+
