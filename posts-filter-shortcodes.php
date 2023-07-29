@@ -21,7 +21,7 @@
 // Enqueue the custom CSS file
 function psf_enqueue_custom_css() {
     // Get the path to the CSS file
-    $css_file_path = plugin_dir_url( __FILE__ ) . 'psf-includes/psf-main.css';
+    $css_file_path = plugin_dir_url( __FILE__ ) . '/psf-includes/psf-main.css';
 
     // Enqueue the CSS file
     wp_enqueue_style( 'psf-main-css', $css_file_path );

@@ -23,7 +23,6 @@ ul.psf-last-updated-posts li a:hover {
 }
 
 /* Style for the PSF Trending Posts */
-/* Style for the PSF Trending Posts */
 ul.psf-trending-posts {
     list-style: none;
     padding: 0;
@@ -32,25 +31,17 @@ ul.psf-trending-posts {
 ul.psf-trending-posts li {
     margin-bottom: 10px;
     padding: 10px;
+    border: 1px solid var(--tl-main); /* Border color from your blog's main color */
+    background-color: #F7F7F8; /* Background color for each heading */
 }
 
 ul.psf-trending-posts li a {
     display: block;
     text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-/* Custom dynamic styles based on the blog's main color */
-ul.psf-trending-posts li {
-    border: 1px solid var(--tl-main);
-    background-color: #F7F7F8;
-}
-
-ul.psf-trending-posts li a {
-    color: var(--tl-main);
+    color: #000; /* Black font color */
+    transition: color 0.2s ease; /* Smooth color transition on hover */
 }
 
 ul.psf-trending-posts li a:hover {
-    background-color: var(--tl-main);
-    color: #FFF; /* Hover font color (white in this example) */
+    color: var(--tl-main); /* Hover font color from your blog's main color */
 }
