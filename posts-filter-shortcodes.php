@@ -77,3 +77,49 @@ function psf_last_updated_posts_shortcode($atts) {
 }
 
 add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');
+
+//PSF Trending Posts Show
+function psf_trending_posts_shortcode($atts) {
+    $atts = shortcode_atts( array(
+        'show' => '',
+        'posts' => 5,
+    ), $atts );
+
+    // Query arguments to get trending posts from the specified category
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => intval($atts['posts']), // Convert to integer for safety
+        'orderby' => 'meta_value_num', // You can use 'meta_value' if you have a custom field storing the trending metric
+        'meta_key' => 'post_views', // Change 'post_views' to the actual meta key used for trending metric
+        'order' => 'DESC',
+    );
+
+    // Include specific category
+    if (!empty($atts['show']) && $atts['show'] !== 'all') {
+        $category = get_category_by_slug($atts['show']);
+        if ($category) {
+            $args['category__in'] = array($category->term_id);
+        }
+    }
+
+    // Query the trending posts
+    $trending_posts = new WP_Query($args);
+
+    // Display the list of trending posts
+    if ($trending_posts->have_posts()) {
+        $output = '<ul class="psf-trending-posts">'; // Add the custom class here
+
+        while ($trending_posts->have_posts()) {
+            $trending_posts->the_post();
+            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+        }
+
+        $output .= '</ul>';
+
+        wp_reset_postdata();
+
+        return $output;
+    }
+}
+
+add_shortcode('psf-trending', 'psf_trending_posts_shortcode');
