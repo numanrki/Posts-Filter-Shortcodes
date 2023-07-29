@@ -27,14 +27,9 @@ The **[psf-updated]** shortcode allows you to display a list of last updated pos
 
 == Usage Examples For Last Updated ==
 
-1. Show 5 posts from the "pricing" category:
-   `[psf-updated show="pricing" num_posts="5"] Also can Show more by separating with a comma.`
-
-2. Show all posts but hide those from the "pricing" category:
-   `[psf-updated show="all" hide="pricing"] Also can hide more by separating with a comma.`
-
-3. Show 3 posts from the "category1" and "category2" categories:
-   `[psf-updated show="category1,category2" num_posts="3"]`
+1. Show 5 posts from the "pricing" category: `**[psf-updated show="pricing" num_posts="5"]** Also can Show more by separating with a comma.`
+2. Show all posts but hide those from the "pricing" category:`**[psf-updated show="all" hide="pricing"]** Also can hide more by separating with a comma.`
+3. Show 3 posts from the "category1" and "category2" categories: `**[psf-updated show="category1,category2" num_posts="3"]**`
 
 == Default Behavior ==
 If no attributes are provided, the **[psf-updated]** shortcode will display all last updated posts from all categories.
@@ -46,7 +41,6 @@ The `[psf-trending]` shortcode supports the following attributes:
 - `hide`: Comma-separated category slugs to hide trending posts from. This attribute is optional. Default: `''`.
 - `posts`: Number of trending posts to display. Default: `5`.
 
-=== Examples ===
 1. Display trending posts from the **"how-to"** category and show 5 posts: Use **[psf-trending show="how-to" posts="5"]** 
 2. Display all trending posts but hide posts from the **"how-to"** category and show 5 posts: **[psf-trending show="all" hide="how-to" posts="5"]**
 3. Display trending posts from both the **"how-to"** and **"guides"** categories and show 5 posts: **[psf-trending show="how-to,guides" posts="5"]**
