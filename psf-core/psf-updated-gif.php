@@ -5,7 +5,7 @@
 $new_gif_image_url = plugin_dir_url( __FILE__ ) . 'assets/gifs/new.gif';
 
 // Last updated Posts Filters With GIF
-function psf_last_updated_posts_shortcode_nogif($atts) {
+function psf_last_updated_posts_shortcode($atts) {
     $atts = shortcode_atts( array(
         'show' => '',
         'hide' => '',
@@ -51,4 +51,4 @@ function psf_last_updated_posts_shortcode_nogif($atts) {
     }
 }
 
-add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode_nogif');
+add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');

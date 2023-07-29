@@ -46,4 +46,4 @@ function psf_last_updated_posts_shortcode_nogif($atts) {
     }
 }
 
-add_shortcode('psf-updated-nogif', 'psf_last_updated_posts_shortcode');
+add_shortcode('psf-updated-nogif', 'psf_last_updated_posts_shortcode_nogif');

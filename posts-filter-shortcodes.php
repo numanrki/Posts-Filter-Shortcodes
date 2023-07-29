@@ -28,8 +28,8 @@ function psf_enqueue_custom_css() {
 }
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
-include_once( plugin_dir_path( __FILE__ ) . 'psf-core\psf-updated-gif.php' );
-include_once( plugin_dir_path( __FILE__ ) . 'psf-core\psf-updated-nogif.php' );
+include_once( plugin_dir_path( __FILE__ ) . 'psf-core/psf-updated-gif.php' );
+include_once( plugin_dir_path( __FILE__ ) . 'psf-core/psf-updated-nogif.php' );
 
 
 //PSF Trending Posts Show
