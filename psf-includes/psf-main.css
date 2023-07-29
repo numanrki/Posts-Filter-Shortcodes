@@ -22,17 +22,17 @@ ul.psf-last-updated-posts li a:hover {
     background-color: #e5e5e5;
 }
 
-/* Style for the Last Updated Posts Widget */
-ul.psf-last-updated-posts {
+/* Style for the PSF Trending Posts */
+ul.psf-trending-posts {
     list-style: none;
     padding: 0;
 }
 
-ul.psf-last-updated-posts li {
+ul.psf-trending-posts li {
     margin-bottom: 10px;
 }
 
-ul.psf-last-updated-posts li a {
+ul.psf-trending-posts li a {
     display: block;
     padding: 5px 10px;
     border: 1px solid var(--tl-main);
@@ -42,6 +42,6 @@ ul.psf-last-updated-posts li a {
     transition: background-color 0.2s ease;
 }
 
-ul.psf-last-updated-posts li a:hover {
+ul.psf-trending-posts li a:hover {
     background-color: #e5e5e5;
 }
