@@ -50,7 +50,7 @@ function psf_last_updated_posts_shortcode($atts) {
     $last_updated_posts = new WP_Query($args);
 
     if ($last_updated_posts->have_posts()) {
-        $output = '<ul class="last-updated-posts">'; // Add the custom class here
+        $output = '<ul class="psf-last-updated-posts">'; // Add the custom class here
 
         while ($last_updated_posts->have_posts()) {
             $last_updated_posts->the_post();
