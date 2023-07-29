@@ -49,7 +49,6 @@ ul.psf-trending-posts li a:hover {
 
 /* GIFs CSS */
 /* Custom CSS for the GIF */
-
 .psf-last-updated-posts li {
     position: relative;
 }
@@ -59,8 +58,9 @@ ul.psf-trending-posts li a:hover {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-    width: 15px; /* Adjust the width as needed */
+    width: 24px; /* Set the GIF width to 24px */
     height: auto; /* Maintain aspect ratio */
 }
+
 
 
