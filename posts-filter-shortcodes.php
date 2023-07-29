@@ -34,12 +34,12 @@ function psf_last_updated_posts_shortcode($atts) {
     $atts = shortcode_atts( array(
         'show' => '',
         'hide' => '',
-        'num_posts' => -1, // Default to show all posts
+        'posts' => -1, // Default to show all posts
     ), $atts );
 
     $args = array(
         'post_type' => 'post',
-        'posts_per_page' => $atts['num_posts'],
+        'posts_per_page' => $atts['posts'],
         'orderby' => 'modified',
         'order' => 'DESC',
     );
@@ -106,11 +106,11 @@ function psf_trending_posts($atts) {
 
     return $output;
 }
-function psf_get_trending_posts($show_categories, $hide_categories, $num_posts) {
+function psf_get_trending_posts($show_categories, $hide_categories, $posts) {
     $args = array(
         'post_type' => 'post',
         'post_status' => 'publish',
-        'posts_per_page' => $num_posts,
+        'posts_per_page' => $posts,
         'meta_key' => 'post_views_count', // Replace 'post_views_count' with your post view count meta key
         'orderby' => 'meta_value_num',
         'order' => 'DESC'
