@@ -46,3 +46,14 @@ ul.psf-trending-posts li a {
 ul.psf-trending-posts li a:hover {
     background-color: #e5e5e5;
 }
+
+/* GIFs CSS */
+/* Custom CSS for the GIF */
+.psf-new-gif {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1;
+}

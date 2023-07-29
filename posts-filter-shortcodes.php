@@ -29,7 +29,7 @@ function psf_enqueue_custom_css() {
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
 
-//Last updated Posts Filters
+// Last updated Posts Filters
 function psf_last_updated_posts_shortcode($atts) {
     $atts = shortcode_atts( array(
         'show' => '',
@@ -65,7 +65,8 @@ function psf_last_updated_posts_shortcode($atts) {
 
         while ($last_updated_posts->have_posts()) {
             $last_updated_posts->the_post();
-            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+            $output .= '<img src="' . plugin_dir_url( __FILE__ ) . 'assets/gifs/new.gif" alt="New" class="psf-new-gif" /></li>';
         }
 
         $output .= '</ul>';
@@ -77,6 +78,7 @@ function psf_last_updated_posts_shortcode($atts) {
 }
 
 add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');
+
 
 //PSF Trending Posts Show
 // Shortcode callback function
