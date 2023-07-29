@@ -21,3 +21,27 @@ ul.psf-last-updated-posts li a {
 ul.psf-last-updated-posts li a:hover {
     background-color: #e5e5e5;
 }
+
+/* Style for the Last Updated Posts Widget */
+ul.psf-last-updated-posts {
+    list-style: none;
+    padding: 0;
+}
+
+ul.psf-last-updated-posts li {
+    margin-bottom: 10px;
+}
+
+ul.psf-last-updated-posts li a {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid var(--tl-main);
+    background-color: #f5f5f5;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+ul.psf-last-updated-posts li a:hover {
+    background-color: #e5e5e5;
+}
