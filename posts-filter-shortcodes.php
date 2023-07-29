@@ -19,49 +19,49 @@
   define( 'Posts_Filter_Shortcodes', '1.0' );
 
 //Last updated Posts Filters
-function psf_last_updated_posts_shortcode($psf_atts) {
-    $psf_atts = shortcode_atts( array(
-        'psf_show_categories' => '',
-        'psf_hide_categories' => '',
-        'psf_num_posts_to_show' => -1, // Default to show all posts
-    ), $psf_atts );
+function psf_last_updated_posts_shortcode($atts) {
+    $atts = shortcode_atts( array(
+        'show' => '',
+        'hide' => '',
+        'num_posts' => -1, // Default to show all posts
+    ), $atts );
 
-    $psf_query_args = array(
+    $args = array(
         'post_type' => 'post',
-        'posts_per_page' => $psf_atts['psf_num_posts_to_show'],
+        'posts_per_page' => $atts['num_posts'],
         'orderby' => 'modified',
         'order' => 'DESC',
     );
 
     // Include specific categories
-    if ( ! empty( $psf_atts['psf_show_categories'] ) && $psf_atts['psf_show_categories'] !== 'all' ) {
-        $psf_category_slugs = explode( ',', $psf_atts['psf_show_categories'] );
-        $psf_category_ids = array_map( 'get_category_by_slug', $psf_category_slugs );
-        $psf_query_args['category__in'] = wp_list_pluck( $psf_category_ids, 'term_id' );
+    if ( ! empty( $atts['show'] ) && $atts['show'] !== 'all' ) {
+        $category_slugs = explode( ',', $atts['show'] );
+        $category_ids = array_map( 'get_category_by_slug', $category_slugs );
+        $args['category__in'] = wp_list_pluck( $category_ids, 'term_id' );
     }
 
     // Exclude specific categories
-    if ( ! empty( $psf_atts['psf_hide_categories'] ) ) {
-        $psf_category_slugs = explode( ',', $psf_atts['psf_hide_categories'] );
-        $psf_category_ids = array_map( 'get_category_by_slug', $psf_category_slugs );
-        $psf_query_args['category__not_in'] = wp_list_pluck( $psf_category_ids, 'term_id' );
+    if ( ! empty( $atts['hide'] ) ) {
+        $category_slugs = explode( ',', $atts['hide'] );
+        $category_ids = array_map( 'get_category_by_slug', $category_slugs );
+        $args['category__not_in'] = wp_list_pluck( $category_ids, 'term_id' );
     }
 
-    $psf_last_updated_posts_query = new WP_Query($psf_query_args);
+    $last_updated_posts = new WP_Query($args);
 
-    if ($psf_last_updated_posts_query->have_posts()) {
-        $psf_output = '<ul class="psf-last-updated-posts">'; // Add the custom class here
+    if ($last_updated_posts->have_posts()) {
+        $output = '<ul class="last-updated-posts">'; // Add the custom class here
 
-        while ($psf_last_updated_posts_query->have_posts()) {
-            $psf_last_updated_posts_query->the_post();
-            $psf_output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+        while ($last_updated_posts->have_posts()) {
+            $last_updated_posts->the_post();
+            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
         }
 
-        $psf_output .= '</ul>';
+        $output .= '</ul>';
 
         wp_reset_postdata();
 
-        return $psf_output;
+        return $output;
     }
 }
 
