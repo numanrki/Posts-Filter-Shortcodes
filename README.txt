@@ -62,3 +62,25 @@ If no attributes are provided, the **[psf-updated]** shortcode will display all 
 * The plugin should now be installed and activated on your WordPress site. You can access the plugin's settings and options by clicking on the **"Settings"** link for the plugin on the **"Plugins"** page.
 
 * **Note:** Some plugins may require additional steps to be fully configured and functional on your site. Be sure to read the documentation provided by the plugin developer for any additional instructions.
+
+
+
+== Upgrade Notice == 
+
+
+== Frequently Asked Questions ==
+
+
+== Screenshots ==
+
+1. List of shortcodes
+2. Table of shortcodes
+3. Using of shortcodes
+4. output of shortcodes
+
+
+
+
+== Changelog ==
+= 1.0.0 =
+Initial Release: Ju.y 29, 2023
