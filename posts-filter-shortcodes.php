@@ -18,6 +18,17 @@
 
   define( 'Posts_Filter_Shortcodes', '1.0' );
 
+// Enqueue the custom CSS file
+function psf_enqueue_custom_css() {
+    // Get the path to the CSS file
+    $css_file_path = plugin_dir_url( __FILE__ ) . 'psf-includes/psf-main.css';
+
+    // Enqueue the CSS file
+    wp_enqueue_style( 'psf-main-css', $css_file_path );
+}
+add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
+
+
 //Last updated Posts Filters
 function psf_last_updated_posts_shortcode($atts) {
     $atts = shortcode_atts( array(
