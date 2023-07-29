@@ -23,6 +23,7 @@ ul.psf-last-updated-posts li a:hover {
 }
 
 /* Style for the PSF Trending Posts */
+/* Style for the PSF Trending Posts */
 ul.psf-trending-posts {
     list-style: none;
     padding: 0;
@@ -30,18 +31,18 @@ ul.psf-trending-posts {
 
 ul.psf-trending-posts li {
     margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid var(--tl-main); /* Border color from your blog's main color */
-    background-color: #F7F7F8; /* Background color for each heading */
 }
 
 ul.psf-trending-posts li a {
     display: block;
+    padding: 5px 10px;
+    border: 1px solid var(--tl-main); /* Border color from your blog's main color */
+    background-color: #F7F7F8; /* Background color for each heading */
     text-decoration: none;
     color: #000; /* Black font color */
-    transition: color 0.2s ease; /* Smooth color transition on hover */
+    transition: background-color 0.2s ease;
 }
 
 ul.psf-trending-posts li a:hover {
-    color: var(--tl-main); /* Hover font color from your blog's main color */
+    background-color: #e5e5e5;
 }
