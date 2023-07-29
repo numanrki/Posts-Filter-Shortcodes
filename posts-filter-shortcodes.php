@@ -29,8 +29,8 @@ function psf_enqueue_custom_css() {
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
 // Include the file from the main plugin directory
-require_once plugin_dir_path( __FILE__ ) . 'psf-core/psf-updated-nogif.php';
-require_once plugin_dir_path( __FILE__ ) . 'psf-core/psf-updated-gif.php';
+require_once plugin_dir_path( __FILE__ ) . '/psf-core/psf-updated-nogif.php';
+require_once plugin_dir_path( __FILE__ ) . '/psf-core/psf-updated-gif.php';
 
 
 
