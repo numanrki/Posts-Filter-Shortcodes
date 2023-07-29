@@ -1,6 +1,6 @@
 <?php
 //Last updated Posts Filters Without GIF
-function psf_last_updated_posts_shortcode($atts) {
+function psf_last_updated_posts_shortcode_nogif($atts) {
     $atts = shortcode_atts( array(
         'show' => '',
         'hide' => '',
