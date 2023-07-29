@@ -50,10 +50,17 @@ ul.psf-trending-posts li a:hover {
 /* GIFs CSS */
 /* Custom CSS for the GIF */
 
-.psf-new-gif {
-    display: inline-block;
-    width: 20px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-    vertical-align: middle;
+.psf-last-updated-posts li {
+    position: relative;
 }
+
+.psf-new-gif {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 15px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
 

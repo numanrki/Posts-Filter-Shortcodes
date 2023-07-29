@@ -65,8 +65,7 @@ function psf_last_updated_posts_shortcode($atts) {
 
         while ($last_updated_posts->have_posts()) {
             $last_updated_posts->the_post();
-            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a>';
-            $output .= '</li><img src="' . plugin_dir_url( __FILE__ ) . 'assets/gifs/new.gif" alt="New" class="psf-new-gif" />';
+            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '<img src="' . plugin_dir_url( __FILE__ ) . 'assets/gifs/new.gif" alt="New" class="psf-new-gif" /></a></li>';
         }
 
         $output .= '</ul>';
@@ -78,6 +77,7 @@ function psf_last_updated_posts_shortcode($atts) {
 }
 
 add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');
+
 
 
 
