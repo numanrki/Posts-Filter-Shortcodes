@@ -1,8 +1,8 @@
 <?php
 //PSF Trending Posts Show
 // Shortcode callback function
-add_shortcode('psf-trending', 'psf_trending_posts');
-function psf_trending_posts($atts) {
+add_shortcode('psf-trending-nogif', 'psf_trending_posts_nogif');
+function psf_trending_posts_nogif($atts) {
     // Extract attributes from the shortcode
     $atts = shortcode_atts(array(
         'show' => '',    // Comma-separated category slugs
@@ -24,7 +24,7 @@ function psf_trending_posts($atts) {
 
     return $output;
 }
-function psf_get_trending_posts($show_categories, $hide_categories, $posts) {
+function psf_get_trending_posts_nogif($show_categories, $hide_categories, $posts) {
     $args = array(
         'post_type' => 'post',
         'post_status' => 'publish',
