@@ -1,7 +1,11 @@
 <?php
-$new_gif_image_url = plugin_dir_url( __FILE__ ) . '/gifs/new.gif';
+// Assuming that psf-no-gif.php is located in the main plugin directory
+// Use '../' to navigate one level up to the main plugin directory
+// Then specify the path to the gif from there
+$new_gif_image_url = plugin_dir_url( __FILE__ ) . 'assets/gifs/new.gif';
+
 // Last updated Posts Filters With GIF
-function psf_last_updated_posts_shortcode($atts) {
+function psf_last_updated_posts_shortcode_nogif($atts) {
     $atts = shortcode_atts( array(
         'show' => '',
         'hide' => '',
@@ -36,7 +40,7 @@ function psf_last_updated_posts_shortcode($atts) {
 
         while ($last_updated_posts->have_posts()) {
             $last_updated_posts->the_post();
-            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '<img src="' . plugin_dir_url( __FILE__ ) . './assets/gifs/new.gif" alt="New" class="psf-new-gif" width="24" height="24" /></a></li>';
+            $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a><img src="' . esc_url( $new_gif_image_url ) . '" alt="New" class="psf-new-gif" width="24" height="24" /></li>';
         }
 
         $output .= '</ul>';
@@ -47,4 +51,4 @@ function psf_last_updated_posts_shortcode($atts) {
     }
 }
 
-add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');
+add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode_nogif');
