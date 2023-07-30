@@ -28,118 +28,116 @@ function psf_enqueue_custom_css() {
 }
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
-
-//PSF Trending Posts Show With GIF
-// Shortcode callback function
-add_shortcode('psf-trending', 'psf_trending_posts');
-function psf_trending_posts($atts) {
-    // Extract attributes from the shortcode
+function psf_trending_nogif_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'show' => '',    // Comma-separated category slugs
-        'hide' => '',    // Comma-separated category slugs to hide
-        'posts' => 5,    // Number of posts to display
+        'show' => '',    // Comma-separated list of categories to show trending posts from
+        'posts' => '5',  // Number of posts to display
+        'hide_from' => '' // Comma-separated list of categories to hide posts from
     ), $atts);
 
-    // Get the trending posts based on the shortcode attributes
-    $trending_query = psf_get_trending_posts($atts['show'], $atts['hide'], $atts['posts']);
+    // Get the category names from shortcode attributes
+    $show_categories = explode(',', $atts['show']);
+    $hide_from_categories = explode(',', $atts['hide_from']);
 
-    // Start building the output
-    $output = '<ul class="psf-trending-posts">';
+    // Query arguments for trending posts
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => intval($atts['posts']),
+        'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
+        'order' => 'desc',
+        'tax_query' => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => $show_categories,
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => $hide_from_categories,
+                'operator' => 'NOT IN',
+            )
+        ),
+    );
 
-    while ($trending_query->have_posts()) {
-        $trending_query->the_post();
+    // Run the query to get trending posts
+    $trending_posts = new WP_Query($args);
 
-        // Generate the link and title for the post
-        $link = '<a href="' . get_permalink() . '">' . get_the_title() . $image'</a>';
-
-        // Add the image path for the hot.gif directly in the link
-
-        // Combine the link and image to create the list item
-        $output .= '<li>' . $link .'</li>';
+    // Output the list of trending posts with HTML class
+    ob_start();
+    if ($trending_posts->have_posts()) {
+        echo '<ul class="psf-trending-posts">';
+        while ($trending_posts->have_posts()) {
+            $trending_posts->the_post();
+            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+        }
+        echo '</ul>';
+    } else {
+        echo 'No trending posts found.';
     }
-
-    // Reset the post data after the loop
     wp_reset_postdata();
-
-    $output .= '</ul>';
-
-    return $output;
+    return ob_get_clean();
 }
+add_shortcode('psf-trending-nogif', 'psf_trending_nogif_shortcode');
 
-function psf_get_trending_posts($show_categories, $hide_categories, $posts) {
-    $args = array(
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => $posts,
-        'meta_key' => 'post_views_count', // Replace 'post_views_count' with your post view count meta key
-        'orderby' => 'meta_value_num',
-        'order' => 'DESC'
-    );
-
-    // If 'show' attribute is provided and not 'all', include specified categories
-    if ($show_categories && $show_categories !== 'all') {
-        $args['category_name'] = $show_categories;
-    }
-
-    // If 'hide' attribute is provided, exclude specified categories
-    if ($hide_categories) {
-        $args['category__not_in'] = explode(',', $hide_categories);
-    }
-
-    $trending_query = new WP_Query($args);
-    return $trending_query;
-}
-
-
-
-//PSF Trending Posts Show WIthout GIF
-// Shortcode callback function
-add_shortcode('psf-trending-nogif', 'psf_trending_posts_nogif');
-function psf_trending_posts_nogif($atts) {
-    // Extract attributes from the shortcode
+function psf_trending_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'show' => '',    // Comma-separated category slugs
-        'hide' => '',    // Comma-separated category slugs to hide
-        'posts' => 5,    // Number of posts to display
+        'show' => '',    // Comma-separated list of categories to show trending posts from
+        'posts' => '5',  // Number of posts to display
+        'hide_from' => '' // Comma-separated list of categories to hide posts from
     ), $atts);
 
-    // Get the trending posts based on the shortcode attributes
-    $trending_posts = psf_get_trending_posts($atts['show'], $atts['hide'], $atts['posts']);
+    // Get the category names from shortcode attributes
+    $show_categories = explode(',', $atts['show']);
+    $hide_from_categories = explode(',', $atts['hide_from']);
 
-    // Start building the output
-    $output = '<ul class="psf-trending-posts">';
-
-    foreach ($trending_posts as $post) {
-        $output .= '<li><a href="' . get_permalink($post->ID) . '">' . get_the_title($post->ID) . '</a></li>';
-    }
-
-    $output .= '</ul>';
-
-    return $output;
-}
-function psf_get_trending_posts_nogif($show_categories, $hide_categories, $posts) {
+    // Query arguments for trending posts
     $args = array(
         'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => $posts,
-        'meta_key' => 'post_views_count', // Replace 'post_views_count' with your post view count meta key
-        'orderby' => 'meta_value_num',
-        'order' => 'DESC'
+        'posts_per_page' => intval($atts['posts']),
+        'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
+        'order' => 'desc',
+        'tax_query' => array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => $show_categories,
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => $hide_from_categories,
+                'operator' => 'NOT IN',
+            )
+        ),
     );
 
-    // If 'show' attribute is provided and not 'all', include specified categories
-    if ($show_categories && $show_categories !== 'all') {
-        $args['category_name'] = $show_categories;
-    }
+    // Run the query to get trending posts
+    $trending_posts = new WP_Query($args);
 
-    // If 'hide' attribute is provided, exclude specified categories
-    if ($hide_categories) {
-        $args['category__not_in'] = explode(',', $hide_categories);
-    }
+    // Get the URL of the blinking GIF from the plugin directory
+    $plugin_directory_url = plugin_dir_url(__FILE__);
+    $blinking_gif_url = $plugin_directory_url . './assets/gifs/hot.gif';
 
-    $trending_query = new WP_Query($args);
-    return $trending_query->posts;
+    // Output the list of trending posts with blinking GIF and HTML class
+    ob_start();
+    if ($trending_posts->have_posts()) {
+        echo '<ul class="psf-trending-posts">';
+        while ($trending_posts->have_posts()) {
+            $trending_posts->the_post();
+            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '<img src="' . esc_url($blinking_gif_url) . '" alt="Hot Gif" class="psf-blinking-gif" width="32" height="32"></a> </li>';
+        }
+        echo '</ul>';
+    } else {
+        echo 'No trending posts found.';
+    }
+    wp_reset_postdata();
+    return ob_get_clean();
 }
+add_shortcode('psf-trending', 'psf_trending_shortcode');
+
 
 // Last updated Posts Filters With GIF
 function psf_last_updated_posts_shortcode($atts) {

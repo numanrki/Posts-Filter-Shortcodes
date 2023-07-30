@@ -64,3 +64,34 @@ ul.psf-trending-posts li a:hover {
 
 
 
+/* Custom styling for the trending posts list */
+.psf-trending-posts {
+    list-style: none;
+    padding: 0;
+}
+
+/* Styling for the trending posts links */
+.psf-trending-posts li a {
+    color: #0073aa; /* Use your preferred link color */
+    text-decoration: none;
+}
+
+.psf-trending-posts li a:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the blinking GIF */
+.psf-blinking-gif {
+    width: 25px;
+    height: 25px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
