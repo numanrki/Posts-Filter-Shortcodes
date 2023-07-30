@@ -41,21 +41,25 @@ function psf_trending_posts($atts) {
     ), $atts);
 
     // Get the trending posts based on the shortcode attributes
-    $trending_posts = psf_get_trending_posts($atts['show'], $atts['hide'], $atts['posts']);
+    $trending_query = psf_get_trending_posts($atts['show'], $atts['hide'], $atts['posts']);
 
     // Start building the output
     $output = '<ul class="psf-trending-posts">';
 
-    foreach ($trending_posts as $post) {
+    while ($trending_query->have_posts()) {
+        $trending_query->the_post();
+
         // Generate the link and title for the post
-        $link = '<a href="' . get_permalink($post->ID) . '">' . get_the_title($post->ID) . '</a>';
+        $link = '<a href="' . get_permalink() . '">' . get_the_title() . $image'</a>';
 
         // Add the image path for the hot.gif directly in the link
-        $image = '<img src="' . plugin_dir_url(__FILE__) . './assets/gifs/hot.gif" alt="New" class="psf-new-gif" width="32" height="32" />';
 
         // Combine the link and image to create the list item
-        $output .= '<li>' . $link . $image . '</li>';
+        $output .= '<li>' . $link .'</li>';
     }
+
+    // Reset the post data after the loop
+    wp_reset_postdata();
 
     $output .= '</ul>';
 
@@ -83,7 +87,7 @@ function psf_get_trending_posts($show_categories, $hide_categories, $posts) {
     }
 
     $trending_query = new WP_Query($args);
-    return $trending_query->posts;
+    return $trending_query;
 }
 
 
