@@ -46,7 +46,6 @@ function psf_trending_posts($atts) {
     // Start building the output
     $output = '<ul class="psf-trending-posts">';
 
-    // Loop through the trending posts
     while ($trending_posts->have_posts()) {
         $trending_posts->the_post();
 
@@ -54,10 +53,10 @@ function psf_trending_posts($atts) {
         $link = '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
 
         // Add the image path for the hot.gif directly in the link
-        $image = '<img src="' . plugin_dir_url(__FILE__) . './assets/gifs/hot.gif" alt="New" class="psf-new-gif" width="32" height="32" />';
+        $image = '<img src="' . plugin_dir_url(__FILE__) . '../assets/gifs/hot.gif" alt="Hot" class="psf-hot-gif" width="32" height="32" />';
 
         // Combine the link and image to create the list item
-        $output .= '<li>' . $link . $image . '</li>';
+        $output .= '<li>' . $link . ' ' . $image . '</li>';
     }
 
     // Reset the post data after the loop
