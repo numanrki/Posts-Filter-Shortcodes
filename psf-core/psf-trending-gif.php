@@ -20,7 +20,7 @@ function psf_trending_posts($atts) {
         // Add the image path for the new.gif directly in the image tag
         // $new_gif_image_url = plugin_dir_url( __FILE__ ) . '../assets/gifs/hot.gif';
 
-        $output .= '<li><a href="' . get_permalink($post->ID) . '">' . get_the_title($post->ID) . '<img src="' . plugin_dir_url(__FILE__) . '../assets/gifs/new.gif" alt="New" class="psf-new-gif" width="32" height="32" /></a></li>';
+        $output .= '<li><a href="' . get_permalink($post->ID) . '">' . get_the_title($post->ID) . '<img src="' . plugin_dir_url(__FILE__) . '../assets/gifs/hot.gif" alt="New" class="psf-new-gif" width="32" height="32" /></a></li>';
     }
 
     $output .= '</ul>';
