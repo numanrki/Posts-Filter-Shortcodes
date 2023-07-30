@@ -28,16 +28,17 @@ function psf_enqueue_custom_css() {
 }
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
+
 function psf_trending_nogif_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'show' => '',    // Comma-separated list of categories to show trending posts from
-        'posts' => '5',  // Number of posts to display
-        'hide_from' => '' // Comma-separated list of categories to hide posts from
+        'show' => '',   // Comma-separated list of categories to show trending posts from
+        'posts' => '5', // Number of posts to display
+        'hide' => ''    // Comma-separated list of categories to hide posts from
     ), $atts);
 
     // Get the category names from shortcode attributes
     $show_categories = explode(',', $atts['show']);
-    $hide_from_categories = explode(',', $atts['hide_from']);
+    $hide_categories = explode(',', $atts['hide']);
 
     // Query arguments for trending posts
     $args = array(
@@ -45,26 +46,31 @@ function psf_trending_nogif_shortcode($atts) {
         'posts_per_page' => intval($atts['posts']),
         'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
         'order' => 'desc',
-        'tax_query' => array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'category',
-                'field' => 'slug',
-                'terms' => $show_categories,
-            ),
-            array(
-                'taxonomy' => 'category',
-                'field' => 'slug',
-                'terms' => $hide_from_categories,
-                'operator' => 'NOT IN',
-            )
-        ),
     );
+
+    // If 'show' attribute is provided and is not equal to 'all'
+    if ($atts['show'] !== 'all' && !empty($show_categories)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => $show_categories,
+        );
+    }
+
+    // If 'hide' attribute is provided
+    if (!empty($hide_categories)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => $hide_categories,
+            'operator' => 'NOT IN',
+        );
+    }
 
     // Run the query to get trending posts
     $trending_posts = new WP_Query($args);
 
-    // Output the list of trending posts with HTML class
+    // Output the list of trending posts
     ob_start();
     if ($trending_posts->have_posts()) {
         echo '<ul class="psf-trending-posts">';
@@ -81,16 +87,19 @@ function psf_trending_nogif_shortcode($atts) {
 }
 add_shortcode('psf-trending-nogif', 'psf_trending_nogif_shortcode');
 
+
+
+
 function psf_trending_shortcode($atts) {
     $atts = shortcode_atts(array(
         'show' => '',    // Comma-separated list of categories to show trending posts from
         'posts' => '5',  // Number of posts to display
-        'hide_from' => '' // Comma-separated list of categories to hide posts from
+        'hide' => '' // Comma-separated list of categories to hide posts from
     ), $atts);
 
     // Get the category names from shortcode attributes
     $show_categories = explode(',', $atts['show']);
-    $hide_from_categories = explode(',', $atts['hide_from']);
+    $hide_from_categories = explode(',', $atts['hide']);
 
     // Query arguments for trending posts
     $args = array(
@@ -98,21 +107,26 @@ function psf_trending_shortcode($atts) {
         'posts_per_page' => intval($atts['posts']),
         'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
         'order' => 'desc',
-        'tax_query' => array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'category',
-                'field' => 'slug',
-                'terms' => $show_categories,
-            ),
-            array(
-                'taxonomy' => 'category',
-                'field' => 'slug',
-                'terms' => $hide_from_categories,
-                'operator' => 'NOT IN',
-            )
-        ),
     );
+
+    // If 'show' attribute is provided and is not equal to 'all'
+    if ($atts['show'] !== 'all' && !empty($show_categories)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => $show_categories,
+        );
+    }
+
+    // If 'hide_from' attribute is provided
+    if (!empty($hide_from_categories)) {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'category',
+            'field' => 'slug',
+            'terms' => $hide_from_categories,
+            'operator' => 'NOT IN',
+        );
+    }
 
     // Run the query to get trending posts
     $trending_posts = new WP_Query($args);
@@ -137,6 +151,7 @@ function psf_trending_shortcode($atts) {
     return ob_get_clean();
 }
 add_shortcode('psf-trending', 'psf_trending_shortcode');
+
 
 
 // Last updated Posts Filters With GIF
