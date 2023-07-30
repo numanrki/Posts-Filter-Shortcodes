@@ -29,7 +29,7 @@ function psf_enqueue_custom_css() {
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
 
-/PSF Trending Posts Show
+//PSF Trending Posts Show
 // Shortcode callback function
 add_shortcode('psf-trending', 'psf_trending_posts');
 function psf_trending_posts($atts) {
