@@ -8,8 +8,8 @@ Requires at least: 4.7
 Tested up to: 6.2
 Stable tag: 1.0
 Requires PHP: 7.0
-License: GPL2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPL3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 **Post Filters Shortcodes** is a powerful WordPress plugin that allows effortless post filtering through user-friendly shortcodes.
