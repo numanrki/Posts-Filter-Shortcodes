@@ -91,4 +91,4 @@ The `[psf-trending]` shortcode supports the following attributes:
 
 == Changelog ==
 = 1.0.0 =
-Initial Release: Ju.y 29, 2023
+Initial Release: July 29, 2023
