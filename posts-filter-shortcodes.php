@@ -8,8 +8,8 @@
  * Tested up to: 6.2
  * Author: Numan Rasheed 
  * Author URI: https://www.numanrki.com
- * License: GPL2
- * License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+ * License: GPL3
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
  */
 
  if ( ! defined( 'WPINC' ) ) {
@@ -89,7 +89,7 @@ add_shortcode('psf-trending-nogif', 'psf_trending_nogif_shortcode');
 
 
 
-
+// PSF Show Trending Posts with GIF
 function psf_trending_shortcode($atts) {
     $atts = shortcode_atts(array(
         'show' => '',    // Comma-separated list of categories to show trending posts from
