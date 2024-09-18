@@ -1,97 +1,36 @@
-/* Style for the Last Updated Posts Widget */
-ul.psf-last-updated-posts {
-    list-style: none;
-    padding: 0;
-}
-
-ul.psf-last-updated-posts li {
-    margin-bottom: 10px;
-}
-
-ul.psf-last-updated-posts li a {
-    display: block;
-    padding: 5px 10px;
-    border: 1px solid var(--tl-main);
-    background-color: #f5f5f5;
-    text-decoration: none;
-    color: #333;
+/* General Styles for Post Widgets */
+.psf-post-item, .psf-trending-posts div, .psf-last-updated-posts div {
+    margin-bottom: 5px; /* Space between posts set to 5px */
+    padding: 5px 10px; /* Padding around each post */
+    border: 1px solid #ccc; /* Border around each post */
+    background-color: #f5f5f5; /* Background color for each post */
     transition: background-color 0.2s ease;
 }
 
-ul.psf-last-updated-posts li a:hover {
-    background-color: #e5e5e5;
+.psf-trending-posts div a, .psf-last-updated-posts div a, 
+.psf-post-item a {
+    text-decoration: none; /* No underline on links */
+    color: #333; /* Text color */
 }
 
-/* Style for the PSF Trending Posts */
-/* Style for the PSF Trending Posts */
-ul.psf-trending-posts {
-    list-style: none;
-    padding: 0;
+.psf-trending-posts div a:hover, .psf-last-updated-posts div a:hover, 
+.psf-post-item a:hover {
+    background-color: #e5e5e5; /* Hover effect */
 }
 
-ul.psf-trending-posts li {
-    margin-bottom: 10px;
-}
-
-ul.psf-trending-posts li a {
-    display: block;
-    padding: 5px 10px;
-    border: 1px solid var(--tl-main); /* Border color from your blog's main color */
-    background-color: #F7F7F8; /* Background color for each heading */
-    text-decoration: none;
-    color: #000; /* Black font color */
-    transition: background-color 0.2s ease;
-}
-
-ul.psf-trending-posts li a:hover {
-    background-color: #e5e5e5;
-}
-
-/* GIFs CSS */
-/* Custom CSS for the GIF */
-.psf-last-updated-posts li {
-    position: relative;
-}
-
-.psf-new-gif {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    width: 24px; /* Set the GIF width to 24px */
-    height: auto; /* Maintain aspect ratio */
-}
-
-
-
-/* Custom styling for the trending posts list */
-.psf-trending-posts {
-    list-style: none;
-    padding: 0;
-}
-
-/* Styling for the trending posts links */
-.psf-trending-posts li a {
-    color: #0073aa; /* Use your preferred link color */
-    text-decoration: none;
-}
-
-.psf-trending-posts li a:hover {
-    text-decoration: underline;
-}
-
-/* Styling for the blinking GIF */
-.psf-blinking-gif {
-    width: 32px;
-    height: 32px;
-    animation: blink 1s infinite;
-}
-
+/* Custom CSS for the Ticker (blinking "New" or "Hot") */
 @keyframes blink {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.psf-trending-posts div a span, .psf-last-updated-posts div a span, 
+.psf-post-item a span {
+    padding: 2px 8px;
+    margin-left: 2px; /* Adds space between the link text and the label */
+    font-weight: bold;
+    font-size: 12px; /* Ensure this matches the size set in the shortcode */
+    border-radius: 3px;
+    display: inline-block;
+    animation: blink 1s infinite;
 }

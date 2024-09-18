@@ -1,94 +1,71 @@
 === Posts Filter Shortcodes ===
 Contributors: numanrki
-Tags: SEO, current year, year, shortcode, current year shortcode, copyright, copyright shortcode, trademark, copyright symbol, trademark shortcode, trademark symbol, symbol shortcode
-Author URI: https://wordpress.org/plugins/Posts-Filter-Shortcodes
-Author: https://numanrki.com
+Tags: posts, filters, shortcode, WordPress, post filter, dynamic content
 Donate link: https://bit.ly/PSFCoffee
 Requires at least: 4.7
 Tested up to: 6.2
-Stable tag: 1.0
+Stable tag: 1.1
 Requires PHP: 7.0
 License: GPL3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-**Post Filters Shortcodes** is a powerful WordPress plugin that allows effortless post filtering through user-friendly shortcodes.
+**Posts Filter Shortcodes** is a versatile WordPress plugin that simplifies the process of displaying filtered post content using intuitive shortcodes. It supports dynamic content filtering based on categories and can be customized to display either updated or trending posts with customizable styles and effects.
 
-== Last Updated Posts Shortcode ==
-The **[psf-updated]** shortcode allows you to display a list of last updated posts on your WordPress site with various options for customization.
+== Features ==
+- **Dynamic Post Filtering**: Easily display posts based on specific categories.
+- **Custom Styles**: Adjust background and text colors, add animations, and more directly via shortcodes.
+- **Flexible Usage**: Compatible with any WordPress theme and can be inserted into pages, posts, or widgets.
 
-== Shortcode Attributes ==
+== Usage ==
 
-1. **show**: A comma-separated list of category slugs to include posts from. By default, all categories are included. Use the value `all` to show all posts regardless of category. Example: `show="category1,category2"`
+=== [psf-updated] Shortcode ===
+Displays a list of last updated posts. You can filter by categories, exclude certain categories, and specify the number of posts to display.
 
-2. **hide**: A comma-separated list of category slugs to exclude posts from. By default, no categories are excluded. Example: `hide="category3,category4"`
+**Attributes:**
+- `show`: Category slugs to include, separated by commas. Leave empty or use "all" to include all categories.
+- `hide`: Category slugs to exclude, separated by commas.
+- `posts`: Number of posts to display. Defaults to all matching posts if not specified.
+- `bg-color`: Background color of the post item.
+- `txt-color`: Text color of the post item.
+- `font-size`: Font size of the post text.
 
-3. **num_posts**: The number of posts to display. By default, all matching posts are shown. Use a numeric value to limit the number of posts shown. Example: `num_posts="5"`
+**Examples:**
+1. `[psf-updated show="news,events" posts="5" bg-color="#EA4335" txt-color="#ffffff" font-size="14"]` - Shows five posts from "news" and "events" categories.
+2. `[psf-updated hide="archive" posts="10"]` - Shows ten posts excluding those in the "archive" category.
 
-== Usage Examples For Last Updated ==
+=== [psf-trending] Shortcode ===
+Displays a list of trending posts based on comment count or other criteria.
 
-1. Show 5 posts from the "pricing" category: `**[psf-updated show="pricing" num_posts="5"]** Also can Show more by separating with a comma.`
-2. Show all posts but hide those from the "pricing" category:`**[psf-updated show="all" hide="pricing"]** Also can hide more by separating with a comma.`
-3. Show 3 posts from the "category1" and "category2" categories: `**[psf-updated show="category1,category2" num_posts="3"]**`
+**Attributes:**
+- `show`: Category slugs to include, similar to [psf-updated].
+- `hide`: Category slugs to exclude.
+- `posts`: Number of posts to display.
+- `bg-color`, `txt-color`, `font-size`: Styling options similar to [psf-updated].
 
-== Default Behavior ==
-If no attributes are provided, the **[psf-updated]** shortcode will display all last updated posts from all categories.
-
-== Usage Examples For Trending Posts ==
-The `[psf-trending]` shortcode supports the following attributes:
-
-- `show`: Comma-separated category slugs to show trending posts from. Use *"all"* to display trending posts from all categories. Default: `''`.
-- `hide`: Comma-separated category slugs to hide trending posts from. This attribute is optional. Default: `''`.
-- `posts`: Number of trending posts to display. Default: `5`.
-
-1. Display trending posts from the **"how-to"** category and show 5 posts: Use **[psf-trending show="how-to" posts="5"]** 
-2. Display all trending posts but hide posts from the **"how-to"** category and show 5 posts: **[psf-trending show="all" hide="how-to" posts="5"]**
-3. Display trending posts from both the **"how-to"** and **"guides"** categories and show 5 posts: **[psf-trending show="how-to,guides" posts="5"]**
-
-1. Display trending posts from the **"how-to"** category and show 5 posts:
-
-== Note ==
-- Make sure to use the category slugs (not names) for the **show** and **hide** attributes.
-- You can use any combination of **show**, **hide**, and **num_posts** to customize the output as per your requirements.
+**Examples:**
+1. `[psf-trending show="how-to,guides" posts="5"]` - Displays trending posts from "how-to" and "guides" categories.
+2. `[psf-trending show="all" hide="old-news" posts="5"]` - Displays all trending posts except those in "old-news".
 
 == Installation ==
-
-* Download the plugin file. The plugin file will usually be in the form of a .zip file.
-
-* Log in to your **WordPress dashboard**.
-
-* Navigate to the **"Plugins"** section by clicking on the **"Plugins"** link in the left-hand menu.
-
-* Click on the **"Add New"** button at the top of the page.
-
-* Click on the **"Upload Plugin"** button.
-
-* Choose the **.zip** file you downloaded in step 1, and then click on the **"Install Now"** button.
-
-* Once the plugin has been installed, click on the **"Activate Plugin"** link to activate it.
-
-* The plugin should now be installed and activated on your WordPress site. You can access the plugin's settings and options by clicking on the **"Settings"** link for the plugin on the **"Plugins"** page.
-
-* **Note:** Some plugins may require additional steps to be fully configured and functional on your site. Be sure to read the documentation provided by the plugin developer for any additional instructions.
-
-
-
-== Upgrade Notice == 
-
+1. Download the plugin ZIP file.
+2. Log in to your WordPress dashboard.
+3. Navigate to "Plugins" > "Add New" > "Upload Plugin".
+4. Upload the ZIP file and click "Install Now".
+5. After installation, activate the plugin via the "Plugins" menu in WordPress.
 
 == Frequently Asked Questions ==
+Q: Can I use multiple shortcodes on the same page?
+A: Yes, you can use multiple instances of [psf-updated] and [psf-trending] on the same page or across the site.
 
-
-== Screenshots ==
-
-1. List of shortcodes
-2. Table of shortcodes
-3. Using of shortcodes
-4. output of shortcodes
-
-
-
+Q: Do I need to know how to code to use this plugin?
+A: No coding knowledge is required! The shortcodes are designed to be simple and user-friendly.
 
 == Changelog ==
-= 1.0.0 =
-Initial Release: July 29, 2023
+= 1.1 =
+- Added font size customization.
+- Improved category filtering logic.
+- Enhanced CSS for better visual separation of post items.
+
+= 1.0 =
+- Initial Release.
