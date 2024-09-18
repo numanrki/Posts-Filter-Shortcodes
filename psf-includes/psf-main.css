@@ -1,36 +1,55 @@
 /* General Styles for Post Widgets */
 .psf-post-item, .psf-trending-posts div, .psf-last-updated-posts div {
-    margin-bottom: 5px; /* Space between posts set to 5px */
-    padding: 5px 10px; /* Padding around each post */
-    border: 1px solid #ccc; /* Border around each post */
-    background-color: #f5f5f5; /* Background color for each post */
-    transition: background-color 0.2s ease;
+    margin-bottom: 5px; /* Space between posts to avoid clumping */
+    padding: 5px 10px; /* Uniform padding around content for better readability */
+    border: 1px solid #ccc; /* Subtle border for visual separation */
+    background-color: #f5f5f5; /* Neutral background to highlight content */
+    transition: background-color 0.2s ease; /* Smooth transition for hover effects */
 }
 
 .psf-trending-posts div a, .psf-last-updated-posts div a, 
 .psf-post-item a {
-    text-decoration: none; /* No underline on links */
-    color: #333; /* Text color */
+    text-decoration: none; /* Removes underline from links for cleaner look */
+    color: #333; /* Dark grey text for better readability against light background */
 }
 
 .psf-trending-posts div a:hover, .psf-last-updated-posts div a:hover, 
 .psf-post-item a:hover {
-    background-color: #e5e5e5; /* Hover effect */
+    background-color: #e5e5e5; /* Light grey background on hover for user feedback */
 }
 
 /* Custom CSS for the Ticker (blinking "New" or "Hot") */
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    0%, 100% { opacity: 1; } /* Fully visible at the start and end of the animation */
+    50% { opacity: 0.5; } /* Half-transparent at the midpoint for a blinking effect */
 }
 
 .psf-trending-posts div a span, .psf-last-updated-posts div a span, 
 .psf-post-item a span {
-    padding: 2px 8px;
-    margin-left: 2px; /* Adds space between the link text and the label */
-    font-weight: bold;
-    font-size: 12px; /* Ensure this matches the size set in the shortcode */
-    border-radius: 3px;
-    display: inline-block;
-    animation: blink 1s infinite;
+    padding: 2px 8px; /* Sufficient padding around the text for a pill-like shape */
+    margin-left: 2px; /* Small space after the link to separate it from the ticker */
+    font-weight: bold; /* Bold text to make the ticker stand out */
+    border-radius: 3px; /* Rounded corners for a smoother visual appeal */
+    display: inline-block; /* Ensures that the ticker can have margin and padding */
+    animation: blink 1s infinite; /* Applies the blinking animation */
+    text-align: center; /* Centers text horizontally */
+    vertical-align: middle; /* Aligns text vertically */
+    line-height: normal; /* Default line height to match the content */
+    width: auto; /* Width auto-adjusts to content size */
+    height: auto; /* Height auto-adjusts to content size */
+}
+
+/* Absolute positioning for tickers */
+.psf-trending-posts div a span.position-top-right, 
+.psf-last-updated-posts div a span.position-top-right {
+    position: absolute;
+    top: 0; /* Aligns the ticker to the top right of the container */
+    right: 0; /* Ensures no space on the right side */
+}
+
+.psf-trending-posts div a span.position-bottom-right, 
+.psf-last-updated-posts div a span.position-bottom-right {
+    position: absolute;
+    bottom: 0; /* Aligns the ticker to the bottom right of the container */
+    right: 0; /* Ensures no space on the right side */
 }

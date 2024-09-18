@@ -30,10 +30,10 @@ Displays a list of last updated posts. You can filter by categories, exclude cer
 - `bg-color`: Background color of the post item.
 - `txt-color`: Text color of the post item.
 - `font-size`: Font size of the post text.
+- `ticker-pos`: Position of the ticker (after, top-right, bottom-right).
 
 **Examples:**
-1. `[psf-updated show="news,events" posts="5" bg-color="#EA4335" txt-color="#ffffff" font-size="14"]` - Shows five posts from "news" and "events" categories.
-2. `[psf-updated hide="archive" posts="10"]` - Shows ten posts excluding those in the "archive" category.
+1. `[psf-updated show="news,events" posts="5" bg-color="#EA4335" txt-color="#ffffff" font-size="14" ticker-pos="after"]` - Shows five posts from "news" and "events" categories with the ticker following the link.
 
 === [psf-trending] Shortcode ===
 Displays a list of trending posts based on comment count or other criteria.
@@ -43,36 +43,23 @@ Displays a list of trending posts based on comment count or other criteria.
 - `hide`: Category slugs to exclude.
 - `posts`: Number of posts to display.
 - `bg-color`, `txt-color`, `font-size`: Styling options similar to [psf-updated].
+- `ticker-pos`: Position of the ticker (after, top-right, bottom-right).
 
 **Examples:**
-1. `[psf-trending show="how-to,guides" posts="5"]` - Displays trending posts from "how-to" and "guides" categories.
-2. `[psf-trending show="all" hide="old-news" posts="5"]` - Displays all trending posts except those in "old-news".
+1. `[psf-trending show="how-to,guides" posts="5" ticker-pos="top-right"]` - Displays trending posts from "how-to" and "guides" categories with the ticker at the top right of each post.
 
-=== [psf-hot-ticker] Shortcode ===
-Displays a blinking "Hot" ticker with customizable background color, text color, font size, width, and height.
+=== [psf-hot-ticker] and [psf-new-ticker] Shortcodes ===
+Displays a blinking ticker with customizable background color, text color, font size, width, and height. Use `psf-hot-ticker` for "Hot" and `psf-new-ticker` for "New".
 
-**Attributes:**
-- `bg-color`: Background color of the ticker. Default: `#ff0000` (red).
-- `txt-color`: Text color of the ticker. Default: `#ffffff` (white).
-- `font-size`: Font size of the ticker text. Default: `12`.
-- `width`: Width of the ticker. Default: `60`.
-- `height`: Height of the ticker. Default: `20`.
-
-**Example:**
-1. `[psf-hot-ticker bg-color="#ff0000" txt-color="#ffffff" font-size="14" width="80" height="30"]` - Displays a blinking "Hot" ticker with custom colors, size, and dimensions.
-
-=== [psf-new-ticker] Shortcode ===
-Displays a blinking "New" ticker with customizable background color, text color, font size, width, and height.
-
-**Attributes:**
-- `bg-color`: Background color of the ticker. Default: `#00ff00` (green).
-- `txt-color`: Text color of the ticker. Default: `#ffffff` (white).
-- `font-size`: Font size of the ticker text. Default: `12`.
-- `width`: Width of the ticker. Default: `60`.
-- `height`: Height of the ticker. Default: `20`.
+**Attributes for both:**
+- `bg-color`: Background color of the ticker.
+- `txt-color`: Text color of the ticker.
+- `font-size`: Font size of the ticker text.
+- `width`: Width of the ticker.
+- `height`: Height of the ticker.
 
 **Example:**
-1. `[psf-new-ticker bg-color="#00ff00" txt-color="#ffffff" font-size="14" width="80" height="30"]` - Displays a blinking "New" ticker with custom colors, size, and dimensions.
+1. `[psf-hot-ticker bg-color="#ff0000" txt-color="#ffffff" font-size="14" width="80" height="30"]` - Displays a blinking "Hot" ticker with custom dimensions and colors.
 
 == Installation ==
 1. Download the plugin ZIP file.
@@ -93,7 +80,7 @@ A: No coding knowledge is required! The shortcodes are designed to be simple and
 - Added font size customization.
 - Improved category filtering logic.
 - Enhanced CSS for better visual separation of post items.
-- Introduced "Hot" and "New" tickers with customizable styles.
+- Introduced "Hot" and "New" tickers with customizable styles and positions.
 
 = 1.0 =
 - Initial Release.

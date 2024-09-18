@@ -26,9 +26,22 @@ function psf_enqueue_custom_css() {
 add_action('wp_enqueue_scripts', 'psf_enqueue_custom_css');
 
 // Helper function to generate custom inline CSS for the shortcodes
-function psf_generate_custom_css($bg_color, $txt_color, $font_size) {
-    return "background-color: {$bg_color}; color: {$txt_color}; padding: 2px 8px; font-weight: bold; font-size: {$font_size}px; border-radius: 3px; display: inline-block; animation: blink 1s infinite;";
+function psf_generate_custom_css($bg_color, $txt_color, $font_size, $width = '30', $height = '15') {
+    return "
+        background-color: {$bg_color}; 
+        color: {$txt_color}; 
+        font-size: {$font_size}px; 
+        width: {$width}px; 
+        height: {$height}px; 
+        display: inline-block; 
+        text-align: center; 
+        line-height: {$height}px; /* Ensures text is vertically centered */
+        font-weight: bold; 
+        border-radius: 3px; 
+        animation: blink 1s infinite;
+    ";
 }
+
 
 // Include the shortcodes from the psf-functions folder
 include_once plugin_dir_path(__FILE__) . 'psf-functions/psf-trending.php';
