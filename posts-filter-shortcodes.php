@@ -4,7 +4,7 @@
  * Plugin URI: https://wordpress.org/plugins/Posts-Filter-Shortcodes/
  * Description: Post Filters Shortcodes is a powerful WordPress plugin that allows effortless post filtering through user-friendly shortcodes.
  * Version: 1.0
- * Requires at least: 4.7
+ * Requires at least: 5.0
  * Tested up to: 6.6
  * Author: Numan Rasheed 
  * Author URI: https://www.numanrki.com
