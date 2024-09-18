@@ -3,7 +3,7 @@
  * Plugin Name: Posts Filter Shortcodes
  * Plugin URI: https://wordpress.org/plugins/Posts-Filter-Shortcodes/
  * Description: Post Filters Shortcodes is a powerful WordPress plugin that allows effortless post filtering through user-friendly shortcodes.
- * Version: 1.0
+ * Version: 1.1
  * Requires at least: 5.0
  * Tested up to: 6.6
  * Author: Numan Rasheed 
@@ -14,9 +14,9 @@
 
  if ( ! defined( 'WPINC' ) ) {
     die;
-  }
+ }
 
-  define( 'Posts_Filter_Shortcodes', '1.0' );
+define( 'Posts_Filter_Shortcodes', '1.1' );
 
 // Enqueue the custom CSS file
 function psf_enqueue_custom_css() {
@@ -28,73 +28,28 @@ function psf_enqueue_custom_css() {
 }
 add_action( 'wp_enqueue_scripts', 'psf_enqueue_custom_css' );
 
-
-function psf_trending_nogif_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'show' => '',   // Comma-separated list of categories to show trending posts from
-        'posts' => '5', // Number of posts to display
-        'hide' => ''    // Comma-separated list of categories to hide posts from
-    ), $atts);
-
-    // Get the category names from shortcode attributes
-    $show_categories = explode(',', $atts['show']);
-    $hide_categories = explode(',', $atts['hide']);
-
-    // Query arguments for trending posts
-    $args = array(
-        'post_type' => 'post',
-        'posts_per_page' => intval($atts['posts']),
-        'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
-        'order' => 'desc',
-    );
-
-    // If 'show' attribute is provided and is not equal to 'all'
-    if ($atts['show'] !== 'all' && !empty($show_categories)) {
-        $args['tax_query'][] = array(
-            'taxonomy' => 'category',
-            'field' => 'slug',
-            'terms' => $show_categories,
-        );
-    }
-
-    // If 'hide' attribute is provided
-    if (!empty($hide_categories)) {
-        $args['tax_query'][] = array(
-            'taxonomy' => 'category',
-            'field' => 'slug',
-            'terms' => $hide_categories,
-            'operator' => 'NOT IN',
-        );
-    }
-
-    // Run the query to get trending posts
-    $trending_posts = new WP_Query($args);
-
-    // Output the list of trending posts
-    ob_start();
-    if ($trending_posts->have_posts()) {
-        echo '<ul class="psf-trending-posts">';
-        while ($trending_posts->have_posts()) {
-            $trending_posts->the_post();
-            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
-        }
-        echo '</ul>';
-    } else {
-        echo 'No trending posts found.';
-    }
-    wp_reset_postdata();
-    return ob_get_clean();
+// Helper function to generate custom inline CSS
+function psf_generate_custom_css($bg_color, $txt_color) {
+    return "
+        background-color: {$bg_color}; 
+        color: {$txt_color}; 
+        padding: 2px 8px; 
+        font-weight: bold; 
+        font-size: 12px; 
+        border-radius: 3px;
+        display: inline-block;
+        animation: blink 1s infinite;
+    ";
 }
-add_shortcode('psf-trending-nogif', 'psf_trending_nogif_shortcode');
 
-
-
-// PSF Show Trending Posts with GIF
+// Shortcode for Trending Posts with CSS Ticker (Hot)
 function psf_trending_shortcode($atts) {
     $atts = shortcode_atts(array(
         'show' => '',    // Comma-separated list of categories to show trending posts from
         'posts' => '5',  // Number of posts to display
-        'hide' => '' // Comma-separated list of categories to hide posts from
+        'hide' => '',    // Comma-separated list of categories to hide posts from
+        'bg-color' => '#ff0000', // Default background color for ticker
+        'txt-color' => '#ffffff' // Default text color for ticker
     ), $atts);
 
     // Get the category names from shortcode attributes
@@ -105,11 +60,10 @@ function psf_trending_shortcode($atts) {
     $args = array(
         'post_type' => 'post',
         'posts_per_page' => intval($atts['posts']),
-        'orderby' => 'comment_count', // You can use a different metric for trending posts if you prefer
+        'orderby' => 'comment_count', // Trending by comments
         'order' => 'desc',
     );
 
-    // If 'show' attribute is provided and is not equal to 'all'
     if ($atts['show'] !== 'all' && !empty($show_categories)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'category',
@@ -118,7 +72,6 @@ function psf_trending_shortcode($atts) {
         );
     }
 
-    // If 'hide_from' attribute is provided
     if (!empty($hide_from_categories)) {
         $args['tax_query'][] = array(
             'taxonomy' => 'category',
@@ -128,20 +81,19 @@ function psf_trending_shortcode($atts) {
         );
     }
 
-    // Run the query to get trending posts
     $trending_posts = new WP_Query($args);
 
-    // Get the URL of the blinking GIF from the plugin directory
-    $plugin_directory_url = plugin_dir_url(__FILE__);
-    $blinking_gif_url = $plugin_directory_url . './assets/gifs/hot.gif';
+    // Generate custom CSS for ticker
+    $custom_css = psf_generate_custom_css($atts['bg-color'], $atts['txt-color']);
 
-    // Output the list of trending posts with blinking GIF and HTML class
+    // Output the list of trending posts with ticker
     ob_start();
     if ($trending_posts->have_posts()) {
         echo '<ul class="psf-trending-posts">';
         while ($trending_posts->have_posts()) {
             $trending_posts->the_post();
-            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '<img src="' . esc_url($blinking_gif_url) . '" alt="Hot Gif" class="psf-blinking-gif" width="32" height="32"></a> </li>';
+            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . 
+                 '<span style="' . esc_attr($custom_css) . '">Hot</span></a></li>';
         }
         echo '</ul>';
     } else {
@@ -152,102 +104,53 @@ function psf_trending_shortcode($atts) {
 }
 add_shortcode('psf-trending', 'psf_trending_shortcode');
 
-
-
-// Last updated Posts Filters With GIF
+// Last Updated Posts with CSS Ticker (New)
 function psf_last_updated_posts_shortcode($atts) {
-  $atts = shortcode_atts( array(
-      'show' => '',
-      'hide' => '',
-      'posts' => -1, // Default to show all posts
-  ), $atts );
+    $atts = shortcode_atts( array(
+        'show' => '',
+        'hide' => '',
+        'posts' => -1, // Show all by default
+        'bg-color' => '#00ff00', // Default background color for ticker
+        'txt-color' => '#ffffff' // Default text color for ticker
+    ), $atts );
 
-  $args = array(
-      'post_type' => 'post',
-      'posts_per_page' => $atts['posts'],
-      'orderby' => 'modified',
-      'order' => 'DESC',
-  );
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => $atts['posts'],
+        'orderby' => 'modified',
+        'order' => 'DESC',
+    );
 
-  // Include specific categories
-  if (!empty($atts['show']) && $atts['show'] !== 'all') {
-      $category_slugs = explode(',', $atts['show']);
-      $category_ids = array_map('get_category_by_slug', $category_slugs);
-      $args['category__in'] = wp_list_pluck($category_ids, 'term_id');
-  }
+    if (!empty($atts['show']) && $atts['show'] !== 'all') {
+        $category_slugs = explode(',', $atts['show']);
+        $category_ids = array_map('get_category_by_slug', $category_slugs);
+        $args['category__in'] = wp_list_pluck($category_ids, 'term_id');
+    }
 
-  // Exclude specific categories
-  if (!empty($atts['hide'])) {
-      $category_slugs = explode(',', $atts['hide']);
-      $category_ids = array_map('get_category_by_slug', $category_slugs);
-      $args['category__not_in'] = wp_list_pluck($category_ids, 'term_id');
-  }
+    if (!empty($atts['hide'])) {
+        $category_slugs = explode(',', $atts['hide']);
+        $category_ids = array_map('get_category_by_slug', $category_slugs);
+        $args['category__not_in'] = wp_list_pluck($category_ids, 'term_id');
+    }
 
-  $last_updated_posts = new WP_Query($args);
+    $last_updated_posts = new WP_Query($args);
 
-  if ($last_updated_posts->have_posts()) {
-      $output = '<ul class="psf-last-updated-posts">';
+    // Generate custom CSS for ticker
+    $custom_css = psf_generate_custom_css($atts['bg-color'], $atts['txt-color']);
 
-      while ($last_updated_posts->have_posts()) {
-          $last_updated_posts->the_post();
-          $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '<img src="' . plugin_dir_url(__FILE__) . './assets/gifs/new.gif" alt="New" class="psf-new-gif" width="32" height="32" /></a></li>';
-      }
-
-      $output .= '</ul>';
-
-      wp_reset_postdata();
-
-      return $output;
-  }
+    ob_start();
+    if ($last_updated_posts->have_posts()) {
+        echo '<ul class="psf-last-updated-posts">';
+        while ($last_updated_posts->have_posts()) {
+            $last_updated_posts->the_post();
+            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . 
+                 '<span style="' . esc_attr($custom_css) . '">New</span></a></li>';
+        }
+        echo '</ul>';
+    } else {
+        echo 'No updated posts found.';
+    }
+    wp_reset_postdata();
+    return ob_get_clean();
 }
-
 add_shortcode('psf-updated', 'psf_last_updated_posts_shortcode');
-
-//Last updated Posts Filters Without GIF
-function psf_last_updated_posts_shortcode_nogif($atts) {
-  $atts = shortcode_atts( array(
-      'show' => '',
-      'hide' => '',
-      'posts' => -1, // Default to show all posts
-  ), $atts );
-
-  $args = array(
-      'post_type' => 'post',
-      'posts_per_page' => $atts['posts'],
-      'orderby' => 'modified',
-      'order' => 'DESC',
-  );
-
-  // Include specific categories
-  if ( ! empty( $atts['show'] ) && $atts['show'] !== 'all' ) {
-      $category_slugs = explode( ',', $atts['show'] );
-      $category_ids = array_map( 'get_category_by_slug', $category_slugs );
-      $args['category__in'] = wp_list_pluck( $category_ids, 'term_id' );
-  }
-
-  // Exclude specific categories
-  if ( ! empty( $atts['hide'] ) ) {
-      $category_slugs = explode( ',', $atts['hide'] );
-      $category_ids = array_map( 'get_category_by_slug', $category_slugs );
-      $args['category__not_in'] = wp_list_pluck( $category_ids, 'term_id' );
-  }
-
-  $last_updated_posts = new WP_Query($args);
-
-  if ($last_updated_posts->have_posts()) {
-      $output = '<ul class="psf-last-updated-posts">'; // Add the custom class here
-
-      while ($last_updated_posts->have_posts()) {
-          $last_updated_posts->the_post();
-          $output .= '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
-      }
-
-      $output .= '</ul>';
-
-      wp_reset_postdata();
-
-      return $output;
-  }
-}
-
-add_shortcode('psf-updated-nogif', 'psf_last_updated_posts_shortcode_nogif');
