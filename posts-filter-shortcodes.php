@@ -5,7 +5,7 @@
  * Description: Post Filters Shortcodes is a powerful WordPress plugin that allows effortless post filtering through user-friendly shortcodes.
  * Version: 1.0
  * Requires at least: 4.7
- * Tested up to: 6.2
+ * Tested up to: 6.6
  * Author: Numan Rasheed 
  * Author URI: https://www.numanrki.com
  * License: GPL3
