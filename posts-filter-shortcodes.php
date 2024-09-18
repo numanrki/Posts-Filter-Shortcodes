@@ -33,3 +33,5 @@ function psf_generate_custom_css($bg_color, $txt_color, $font_size) {
 // Include the shortcodes from the psf-functions folder
 include_once plugin_dir_path(__FILE__) . 'psf-functions/psf-trending.php';
 include_once plugin_dir_path(__FILE__) . 'psf-functions/psf-updated.php';
+include_once plugin_dir_path(__FILE__) . 'psf-functions/psf-ticker-hot.php';
+include_once plugin_dir_path(__FILE__) . 'psf-functions/psf-ticker-new.php';

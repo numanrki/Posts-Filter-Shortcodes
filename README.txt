@@ -10,10 +10,11 @@ License: GPL3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-**Posts Filter Shortcodes** is a versatile WordPress plugin that simplifies the process of displaying filtered post content using intuitive shortcodes. It supports dynamic content filtering based on categories and can be customized to display either updated or trending posts with customizable styles and effects.
+**Posts Filter Shortcodes** is a versatile WordPress plugin that simplifies the process of displaying filtered post content using intuitive shortcodes. It supports dynamic content filtering based on categories and can be customized to display either updated, trending posts, or standalone blinking tickers with customizable styles and effects.
 
 == Features ==
 - **Dynamic Post Filtering**: Easily display posts based on specific categories.
+- **Custom Tickering**: Display standalone "Hot" or "New" tickers with customizable colors, sizes, and animations.
 - **Custom Styles**: Adjust background and text colors, add animations, and more directly via shortcodes.
 - **Flexible Usage**: Compatible with any WordPress theme and can be inserted into pages, posts, or widgets.
 
@@ -47,6 +48,32 @@ Displays a list of trending posts based on comment count or other criteria.
 1. `[psf-trending show="how-to,guides" posts="5"]` - Displays trending posts from "how-to" and "guides" categories.
 2. `[psf-trending show="all" hide="old-news" posts="5"]` - Displays all trending posts except those in "old-news".
 
+=== [psf-hot-ticker] Shortcode ===
+Displays a blinking "Hot" ticker with customizable background color, text color, font size, width, and height.
+
+**Attributes:**
+- `bg-color`: Background color of the ticker. Default: `#ff0000` (red).
+- `txt-color`: Text color of the ticker. Default: `#ffffff` (white).
+- `font-size`: Font size of the ticker text. Default: `12`.
+- `width`: Width of the ticker. Default: `60`.
+- `height`: Height of the ticker. Default: `20`.
+
+**Example:**
+1. `[psf-hot-ticker bg-color="#ff0000" txt-color="#ffffff" font-size="14" width="80" height="30"]` - Displays a blinking "Hot" ticker with custom colors, size, and dimensions.
+
+=== [psf-new-ticker] Shortcode ===
+Displays a blinking "New" ticker with customizable background color, text color, font size, width, and height.
+
+**Attributes:**
+- `bg-color`: Background color of the ticker. Default: `#00ff00` (green).
+- `txt-color`: Text color of the ticker. Default: `#ffffff` (white).
+- `font-size`: Font size of the ticker text. Default: `12`.
+- `width`: Width of the ticker. Default: `60`.
+- `height`: Height of the ticker. Default: `20`.
+
+**Example:**
+1. `[psf-new-ticker bg-color="#00ff00" txt-color="#ffffff" font-size="14" width="80" height="30"]` - Displays a blinking "New" ticker with custom colors, size, and dimensions.
+
 == Installation ==
 1. Download the plugin ZIP file.
 2. Log in to your WordPress dashboard.
@@ -56,7 +83,7 @@ Displays a list of trending posts based on comment count or other criteria.
 
 == Frequently Asked Questions ==
 Q: Can I use multiple shortcodes on the same page?
-A: Yes, you can use multiple instances of [psf-updated] and [psf-trending] on the same page or across the site.
+A: Yes, you can use multiple instances of [psf-updated], [psf-trending], [psf-hot-ticker], and [psf-new-ticker] on the same page or across the site.
 
 Q: Do I need to know how to code to use this plugin?
 A: No coding knowledge is required! The shortcodes are designed to be simple and user-friendly.
@@ -66,6 +93,7 @@ A: No coding knowledge is required! The shortcodes are designed to be simple and
 - Added font size customization.
 - Improved category filtering logic.
 - Enhanced CSS for better visual separation of post items.
+- Introduced "Hot" and "New" tickers with customizable styles.
 
 = 1.0 =
 - Initial Release.
